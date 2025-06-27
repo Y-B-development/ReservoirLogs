@@ -1,0 +1,48 @@
+// client/src/App.js
+
+import React, { useEffect, useState } from 'react';
+import './App.css';
+import MessageList from './components/MessageList';
+import MessageForm from './components/MessageForm';
+
+function App() {
+  const [messages, setMessages] = useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost:5000/api/messages')
+      .then(res => res.json())
+      .then(data => setMessages(data));
+  }, []);
+
+ const sendMessage = async (content) => {
+  try {
+    const res = await fetch('http://localhost:5000/api/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ content }),
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      throw new Error(data.error || 'Unknown error');
+    }
+
+    setMessages(prev => [...prev, data]);
+    return null;
+  } catch (err) {
+    console.error('Frontend caught error:', err.message);
+    return err.message;
+  }
+};
+
+  return (
+    <div className="app-container">
+      <h1>ReservoirLogs</h1>
+      <MessageList messages={messages} />
+      <MessageForm onSend={sendMessage} />
+    </div>
+  );
+}
+
+export default App;
