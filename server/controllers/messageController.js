@@ -31,6 +31,7 @@ export const createMessage = async (req, res) => {
     });
 
     const newMessage = await Message.create({ content: cleanedContent });
+    console.log('✅ Message created:', newMessage);
     res.status(201).json(newMessage);
   } catch (err) {
     console.error('Server error:', err);

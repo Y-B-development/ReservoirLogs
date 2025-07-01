@@ -29,6 +29,9 @@ function App() {
       throw new Error(data.error || 'Unknown error');
     }
 
+  const text = await res.text();           // ← temporary for debugging
+console.log('🔁 Response text:', text);  // ← see what's returned
+
     setMessages(prev => [...prev, data]);
     return null;
   } catch (err) {
