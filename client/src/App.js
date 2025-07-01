@@ -1,12 +1,11 @@
-// client/src/App.js
-
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import './App.css';
 import MessageList from './components/MessageList';
 import MessageForm from './components/MessageForm';
 
 function App() {
   const [messages, setMessages] = useState([]);
+  const messagesRef = useRef(null);
 
   // Your Koyeb backend URL
   const API_URL = 'https://tasteless-amalie-y-b-development-e34c22e7.koyeb.app';
@@ -24,11 +23,19 @@ function App() {
       }
     };
 
-    fetchMessages();                  // initial load
+    fetchMessages();
     const interval = setInterval(fetchMessages, 2000);
     return () => clearInterval(interval);
   }, []);
 
+  // Scroll to bottom whenever messages change
+  useEffect(() => {
+    if (messagesRef.current) {
+      messagesRef.current.scrollTop = messagesRef.current.scrollHeight;
+    }
+  }, [messages]);
+
+  // Send a new message
   const sendMessage = async (content) => {
     try {
       const res = await fetch(`${API_URL}/api/messages`, {
@@ -38,7 +45,8 @@ function App() {
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || 'Failed to send message');
-      setMessages(prev => [...prev, data]);  // optimistic update
+      // Optimistic update
+      setMessages(prev => [...prev, data]);
       return null;
     } catch (err) {
       console.error('Error sending message:', err);
@@ -56,7 +64,7 @@ function App() {
 
   return (
     <div className="app-container">
-      <div className="messages-container">
+      <div className="messages-container" ref={messagesRef}>
         <MessageList messages={messages} />
       </div>
       <form onSubmit={handleSubmit}>
