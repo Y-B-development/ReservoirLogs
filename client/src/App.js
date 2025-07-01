@@ -24,12 +24,11 @@ function App() {
       }
     };
 
-    fetchMessages();
+    fetchMessages();                  // initial load
     const interval = setInterval(fetchMessages, 2000);
     return () => clearInterval(interval);
   }, []);
 
-  // Send a new message
   const sendMessage = async (content) => {
     try {
       const res = await fetch(`${API_URL}/api/messages`, {
@@ -37,12 +36,9 @@ function App() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ content }),
       });
-
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || 'Failed to send message');
-
-      // Optimistic update
-      setMessages(prev => [...prev, data]);
+      setMessages(prev => [...prev, data]);  // optimistic update
       return null;
     } catch (err) {
       console.error('Error sending message:', err);
@@ -50,19 +46,20 @@ function App() {
     }
   };
 
+  const handleSubmit = e => {
+    e.preventDefault();
+    const content = e.target.elements.content.value.trim();
+    if (!content) return;
+    sendMessage(content);
+    e.target.reset();
+  };
+
   return (
     <div className="app-container">
-      <div className="messages">
+      <div className="messages-container">
         <MessageList messages={messages} />
       </div>
-      <form
-        onSubmit={e => {
-          e.preventDefault();
-          const content = e.target.elements.content.value;
-          sendMessage(content);
-          e.target.reset();
-        }}
-      >
+      <form onSubmit={handleSubmit}>
         <input name="content" type="text" placeholder="Type a message..." />
         <button type="submit">Send</button>
       </form>
