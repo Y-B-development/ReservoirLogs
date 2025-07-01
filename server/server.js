@@ -9,6 +9,8 @@ import messageRoutes from './routes/messageRoutes.js';
 dotenv.config();
 const app = express();
 
+app.set('trust proxy', 1);
+
 // 🚫 Rate limiter to prevent spam
 const limiter = rateLimit({
   windowMs: 15 * 1000, // 15 seconds
