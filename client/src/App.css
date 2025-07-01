@@ -26,7 +26,7 @@ html, body {
   flex: 1;                  /* take all space above form */
   overflow-y: auto;         /* scroll inside here */
   padding-right: 0.25rem;
-  padding-bottom: 4rem;     /* space for the sticky form */
+  /* padding-bottom removed */
   margin-bottom: 0;
 }
 
