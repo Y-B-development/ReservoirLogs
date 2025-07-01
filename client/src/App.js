@@ -26,7 +26,10 @@ function App() {
         body: JSON.stringify({ content }),
       });
 
-      // Read response body only once as JSON
+      if (res.bodyUsed) {
+        throw new Error('Response body already used');
+      }
+
       const data = await res.json();
 
       if (!res.ok) {
