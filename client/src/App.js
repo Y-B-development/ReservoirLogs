@@ -8,10 +8,10 @@ import MessageForm from './components/MessageForm';
 function App() {
   const [messages, setMessages] = useState([]);
 
-  // Replace with your actual deployed backend URL
+  // Your Koyeb backend URL
   const API_URL = 'https://tasteless-amalie-y-b-development-e34c22e7.koyeb.app';
 
-  // Polling: fetch messages on load and then every 2 seconds
+  // Polling: fetch messages immediately and then every 2 seconds
   useEffect(() => {
     const fetchMessages = async () => {
       try {
@@ -24,10 +24,9 @@ function App() {
       }
     };
 
-    fetchMessages(); // Initial fetch
-    const interval = setInterval(fetchMessages, 2000); // Poll every 2 seconds
-
-    return () => clearInterval(interval); // Cleanup on unmount
+    fetchMessages();
+    const interval = setInterval(fetchMessages, 2000);
+    return () => clearInterval(interval);
   }, []);
 
   // Send a new message
@@ -42,8 +41,8 @@ function App() {
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || 'Failed to send message');
 
-      // Optimistically add new message to state
-      setMessages((prev) => [...prev, data]);
+      // Optimistic update
+      setMessages(prev => [...prev, data]);
       return null;
     } catch (err) {
       console.error('Error sending message:', err);
@@ -53,9 +52,20 @@ function App() {
 
   return (
     <div className="app-container">
-      <h1>ReservoirLogs</h1>
-      <MessageList messages={messages} />
-      <MessageForm onSend={sendMessage} />
+      <div className="messages">
+        <MessageList messages={messages} />
+      </div>
+      <form
+        onSubmit={e => {
+          e.preventDefault();
+          const content = e.target.elements.content.value;
+          sendMessage(content);
+          e.target.reset();
+        }}
+      >
+        <input name="content" type="text" placeholder="Type a message..." />
+        <button type="submit">Send</button>
+      </form>
     </div>
   );
 }
