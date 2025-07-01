@@ -1,37 +1,34 @@
 /* client/src/App.css */
 
-/* Reset body to occupy full screen */
+/* Ensure full‑screen usage */
 html, body {
   height: 100%;
   margin: 0;
-  font-family: 'Courier New', monospace;
-  background-color: #0e0e0e;
+  background: #0e0e0e;
   color: #f1f1f1;
+  font-family: 'Courier New', monospace;
 }
 
-/* Center container on larger screens, edge‑to‑edge on mobile */
 .app-container {
-  box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  height: 100%;
-  padding: 1rem;
-  margin: 0 auto;
-  width: 100%;
+  height: 100vh;           /* fill viewport */
   max-width: 600px;
+  margin: 0 auto;          /* center horizontally */
   background: #1e1e1e;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 10px rgba(255,255,255,0.1);
+  box-sizing: border-box;
+  padding: 1rem;
 }
 
-/* Scrollable messages area */
 .messages-container {
-  flex: 1;
-  overflow-y: auto;
-  padding-right: 0.5rem;
-  margin-bottom: 1rem;
+  flex: 1;                 /* take all space above form */
+  overflow-y: auto;        /* scroll only messages */
+  margin-bottom: 0.5rem;
+  padding-right: 0.25rem;  /* avoid scrollbar overlap */
 }
 
+/* Message styles */
 .message {
   background: #292929;
   padding: 0.75rem 1rem;
@@ -46,33 +43,36 @@ html, body {
   margin-top: 0.25rem;
 }
 
-/* Input bar fixed at bottom of container */
-form {
+/* Fix the form at bottom */
+form, .message-form-container {
   display: flex;
   gap: 0.5rem;
 }
 
-input {
-  flex: 1;
-  padding: 0.5rem;
+.message-form-container {
+  /* stays at bottom because container is column flex */
+}
+
+input, button {
   border: none;
   border-radius: 4px;
+  padding: 0.5rem;
+}
+
+input {
+  flex: 1;
 }
 
 button {
-  padding: 0.5rem 1rem;
-  border: none;
-  background-color: #4CAF50;
+  background: #4CAF50;
   color: white;
-  border-radius: 4px;
   cursor: pointer;
 }
 
-/* Make everything adapt on small screens */
+/* On mobile, edge‑to‑edge */
 @media (max-width: 400px) {
   .app-container {
     padding: 0.5rem;
-    border-radius: 0;
     box-shadow: none;
   }
   input, button {
