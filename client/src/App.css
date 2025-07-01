@@ -1,59 +1,57 @@
 /* client/src/App.css */
 
-body {
-  background-color: #0e0e0e;
-  font-family: 'Courier New', monospace;
-  color: #f1f1f1;
+/* Reset body to occupy full screen */
+html, body {
+  height: 100%;
   margin: 0;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0;
+  font-family: 'Courier New', monospace;
+  background-color: #0e0e0e;
+  color: #f1f1f1;
 }
 
+/* Center container on larger screens, edge‑to‑edge on mobile */
 .app-container {
-  width: 100%;
-  max-width: 600px;
-  height: 90vh; /* nearly full viewport */
-  background: #1e1e1e;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  height: 100%;
+  padding: 1rem;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 600px;
+  background: #1e1e1e;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
-  padding: 1rem;
-  box-sizing: border-box;
 }
 
+/* Scrollable messages area */
 .messages-container {
-  flex-grow: 1;
+  flex: 1;
   overflow-y: auto;
-  margin-bottom: 1rem;
   padding-right: 0.5rem;
+  margin-bottom: 1rem;
 }
 
-/* Each message */
 .message {
   background: #292929;
   padding: 0.75rem 1rem;
   margin-bottom: 0.5rem;
   border-radius: 6px;
+  word-wrap: break-word;
 }
 
-/* Timestamp below message */
 .message-time {
   font-size: 0.75rem;
   color: #888;
   margin-top: 0.25rem;
 }
 
-/* Form at bottom */
+/* Input bar fixed at bottom of container */
 form {
   display: flex;
   gap: 0.5rem;
 }
 
-/* Input bar */
 input {
   flex: 1;
   padding: 0.5rem;
@@ -61,7 +59,6 @@ input {
   border-radius: 4px;
 }
 
-/* Send button */
 button {
   padding: 0.5rem 1rem;
   border: none;
@@ -69,4 +66,17 @@ button {
   color: white;
   border-radius: 4px;
   cursor: pointer;
+}
+
+/* Make everything adapt on small screens */
+@media (max-width: 400px) {
+  .app-container {
+    padding: 0.5rem;
+    border-radius: 0;
+    box-shadow: none;
+  }
+  input, button {
+    font-size: 14px;
+    padding: 0.4rem;
+  }
 }
