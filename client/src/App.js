@@ -9,14 +9,15 @@ function App() {
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/messages')
+    fetch(`${process.env.REACT_APP_API_URL}/api/messages`)
       .then(res => res.json())
       .then(data => setMessages(data));
   }, []);
 
  const sendMessage = async (content) => {
   try {
-    const res = await fetch('http://localhost:5000/api/messages', {
+    const res = await fetch(
+      `${process.env.REACT_APP_API_URL}/api/messages` , {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ content }),
