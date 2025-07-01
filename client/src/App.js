@@ -10,8 +10,12 @@ function App() {
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URL}/api/messages`)
-      .then(res => res.json())
-      .then(data => setMessages(data));
+  .then(res => {
+    if (!res.ok) throw new Error('Failed to fetch messages');
+    return res.json();
+  })
+  .then(data => setMessages(data))
+  .catch(err => console.error('Fetch messages error:', err));
   }, []);
 
  const sendMessage = async (content) => {
@@ -29,8 +33,7 @@ function App() {
       throw new Error(data.error || 'Unknown error');
     }
 
-  const text = await res.text();           // ← temporary for debugging
-console.log('🔁 Response text:', text);  // ← see what's returned
+  console.log('🔁 Response text:', text);  // ← see what's returned
 
     setMessages(prev => [...prev, data]);
     return null;
