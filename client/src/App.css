@@ -20,25 +20,18 @@ html, body {
   padding: 1rem;
 }
 
-/* Sticky golden "ReservoirLogs" title without background */
+/* Sticky golden "ReservoirLogs" title without red shadow */
 .reservoir-logo {
   font-size: 3rem;
   text-align: center;
   margin: 0 0 1rem;
   position: sticky;
   top: 0;
-  /* background removed */
-  z-index: 10;
-  color: #E8A317;
+  color: #E8A317; /* golden color */
+  background: none; /* removed background */
 }
-.reservoir-logo::before {
-  content: attr(data-text);
-  position: absolute;
-  top: 2px;
-  left: 2px;
-  color: #9B2D30;
-  z-index: -1;
-}
+
+/* Removed the ::before pseudo-element that duplicated the title in red */
 
 /* Scrollable messages area */
 .messages-container {
@@ -50,8 +43,8 @@ html, body {
 /* Smaller message bubbles */
 .message {
   background: #292929;
-  padding: 0.5rem 0.75rem; /* reduced padding */
-  margin-bottom: 0.25rem; /* reduced margin */
+  padding: 0.5rem 0.75rem;
+  margin-bottom: 0.25rem;
   border-radius: 6px;
   word-wrap: break-word;
 }
