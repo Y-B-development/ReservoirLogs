@@ -1,63 +1,50 @@
 /* client/src/App.css */
 
-/* Full-screen background with dark overlay */
-body {
+/* Base reset */
+html, body {
+  height: 100%;
   margin: 0;
   padding: 0;
-  height: 100vh;
-  background: 
-    /* dark overlay layer */
-    linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
-    /* poster image layer */
-    url('/assets/reservoir-dogs-poster.jpg') no-repeat center center;
-  background-size: cover;
-  font-family: 'Courier New', monospace;
+  font-family: 'StymieExtraBold', serif;
   color: #f1f1f1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
-/* Main chat container */
+/* Main container: fills screen */
 .app-container {
   display: flex;
   flex-direction: column;
-  height: 90vh;
-  width: 100%;
+  height: 100vh;
   max-width: 600px;
-  background: rgba(30, 30, 30, 0.85); /* translucent dark background */
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(255,255,255,0.1);
+  margin: 0 auto;
   box-sizing: border-box;
   padding: 1rem;
 }
 
-/* Hateful Eight–style logo */
+/* Title styling */
 .reservoir-logo {
-  font-family: 'StymieExtraBold', serif;
   font-size: 3rem;
   text-align: center;
   margin: 0 0 1rem;
   position: relative;
-  color: #E8A317; /* golden front */
+  color: #E8A317;
 }
 .reservoir-logo::before {
   content: attr(data-text);
   position: absolute;
   top: 2px;
   left: 2px;
-  color: #9B2D30; /* deep red shadow */
+  color: #9B2D30;
   z-index: -1;
 }
 
-/* Scrollable messages area */
+/* Messages area */
 .messages-container {
   flex: 1;
   overflow-y: auto;
   padding-right: 0.25rem;
 }
 
-/* Each message */
+/* Message bubble */
 .message {
   background: #292929;
   padding: 0.75rem 1rem;
@@ -71,11 +58,11 @@ body {
   margin-top: 0.25rem;
 }
 
-/* Sticky form at bottom */
+/* Sticky form */
 form {
   position: sticky;
   bottom: 0;
-  background: rgba(30, 30, 30, 0.85);
+  background: rgba(30,30,30,0.85);
   display: flex;
   gap: 0.5rem;
   padding-top: 0.5rem;
@@ -98,9 +85,7 @@ button {
 /* Mobile tweaks */
 @media (max-width: 400px) {
   .app-container {
-    height: 95vh;
     padding: 0.5rem;
-    box-shadow: none;
   }
   input, button {
     font-size: 14px;
