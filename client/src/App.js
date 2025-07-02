@@ -1,5 +1,3 @@
-// client/src/App.js
-
 import React, { useEffect, useState, useRef } from 'react';
 import './App.css';
 import MessageList from './components/MessageList';
@@ -8,10 +6,9 @@ import MessageForm from './components/MessageForm';
 function App() {
   const [messages, setMessages] = useState([]);
   const messagesRef = useRef(null);
-
   const API_URL = 'https://tasteless-amalie-y-b-development-e34c22e7.koyeb.app';
 
-  // Polling: fetch messages every 2 seconds
+  // Polling for new messages
   useEffect(() => {
     const fetchMessages = async () => {
       try {
@@ -28,14 +25,14 @@ function App() {
     return () => clearInterval(iv);
   }, []);
 
-  // Auto‑scroll to bottom on new messages
+  // Auto‑scroll to bottom
   useEffect(() => {
     if (messagesRef.current) {
       messagesRef.current.scrollTop = messagesRef.current.scrollHeight;
     }
   }, [messages]);
 
-  const sendMessage = async (content) => {
+  const sendMessage = async content => {
     try {
       const res = await fetch(`${API_URL}/api/messages`, {
         method: 'POST',
@@ -59,10 +56,10 @@ function App() {
     }
   };
 
-  // Split name into letters for styling
-  const title = 'ReservoirLogs'.split('').map((char, i) => (
+  // ReservoirLogs title split into spans
+  const title = 'RESERVO RLOGS'.replace(' ', '').split('').map((char, i) =>
     <span key={i}>{char}</span>
-  ));
+  );
 
   return (
     <div className="app-container">

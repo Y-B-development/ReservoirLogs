@@ -1,6 +1,4 @@
-/* client/src/App.css */
-
-/* Reset and full‑screen */
+/* Full-screen & reset */
 html, body {
   height: 100%;
   margin: 0;
@@ -16,24 +14,24 @@ html, body {
   max-width: 600px;
   margin: 0 auto;
   background: #1e1e1e;
-  box-shadow: 0 0 10px rgba(255,255,255,0.1);
+  box-shadow: 0 0 10px rgba(0,0,0,0.7);
   box-sizing: border-box;
   padding: 1rem;
 }
 
-/* Title in 'Reservoir Dogs' style */
+/* “ReservoirLogs” in alternating orange/red */
 .reservoir-logo {
-  font-size: 2rem;
   text-align: center;
+  font-size: 2.5rem;
+  letter-spacing: 0.2em;
   margin: 0 0 1rem;
-  font-weight: bold;
-  letter-spacing: 0.1em;
+  font-family: 'StymieExtraBold', serif; /* or fallback slab-serif */
 }
 .reservoir-logo span:nth-child(odd) {
-  color: #E40613; /* red */
+  color: #FF8C00; /* dark orange */
 }
 .reservoir-logo span:nth-child(even) {
-  color: #ffffff; /* white */
+  color: #B22222; /* firebrick red */
 }
 
 /* Scrollable messages */
@@ -43,7 +41,7 @@ html, body {
   padding-right: 0.25rem;
 }
 
-/* Message bubble */
+/* Individual message */
 .message {
   background: #292929;
   padding: 0.75rem 1rem;
@@ -78,8 +76,20 @@ input {
 button {
   padding: 0.5rem 1rem;
   border: none;
-  background: #4caf50;
+  background: #4CAF50;
   color: white;
   border-radius: 4px;
   cursor: pointer;
+}
+
+/* Mobile tweaks */
+@media (max-width: 400px) {
+  .app-container {
+    padding: 0.5rem;
+    box-shadow: none;
+  }
+  input, button {
+    font-size: 14px;
+    padding: 0.4rem;
+  }
 }
