@@ -31,14 +31,6 @@ html, body {
   z-index: 10;
   color: #E8A317;
 }
-.reservoir-logo::before {
-  content: attr(data-text);
-  position: absolute;
-  top: 2px;
-  left: 2px;
-  color: #9B2D30;
-  z-index: -1;
-}
 
 /* Messages scroll area */
 .messages-container {
@@ -61,7 +53,7 @@ html, body {
   margin-top: 0.25rem;
 }
 
-/* Sticky form */
+/* Sticky input bar */
 form {
   position: sticky;
   bottom: 0;
