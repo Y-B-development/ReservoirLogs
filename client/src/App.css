@@ -1,24 +1,15 @@
 /* client/src/App.css */
 
-/* Reset and full-screen background */
+/* Reset */
 html, body {
   height: 100%;
   margin: 0;
   padding: 0;
-  background:
-    linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
-    url('/assets/reservoir-dogs-poster.jpg') no-repeat center center;
-  background-size: cover;
   font-family: 'StymieExtraBold', serif;
   color: #f1f1f1;
 }
 
-/* Ensure body scrolls normally */
-body {
-  display: block;
-}
-
-/* Main container uses full width and height */
+/* Container fills viewport */
 .app-container {
   display: flex;
   flex-direction: column;
@@ -29,7 +20,7 @@ body {
   padding: 1rem;
 }
 
-/* Sticky header at top */
+/* Sticky header */
 .reservoir-logo {
   font-size: 3rem;
   text-align: center;
@@ -49,14 +40,14 @@ body {
   z-index: -1;
 }
 
-/* Messages area fills between header and footer */
+/* Messages scroll area */
 .messages-container {
   flex: 1;
   overflow-y: auto;
   padding-right: 0.25rem;
 }
 
-/* Message bubble styling */
+/* Message bubble */
 .message {
   background: #292929;
   padding: 0.75rem 1rem;
@@ -70,7 +61,7 @@ body {
   margin-top: 0.25rem;
 }
 
-/* Sticky input bar at bottom */
+/* Sticky form */
 form {
   position: sticky;
   bottom: 0;
@@ -94,7 +85,7 @@ button {
   cursor: pointer;
 }
 
-/* Mobile responsive tweaks */
+/* Mobile tweaks */
 @media (max-width: 400px) {
   .app-container {
     padding: 0.5rem;

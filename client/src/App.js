@@ -17,10 +17,9 @@ function App() {
       try {
         const res = await fetch(`${API_URL}/api/messages`);
         if (!res.ok) throw new Error('Fetch failed');
-        const data = await res.json();
-        setMessages(data);
-      } catch (err) {
-        console.error(err);
+        setMessages(await res.json());
+      } catch (e) {
+        console.error(e);
       }
     };
     fetchMessages();
@@ -28,7 +27,7 @@ function App() {
     return () => clearInterval(iv);
   }, []);
 
-  // Auto-scroll
+  // Auto‑scroll to bottom
   useEffect(() => {
     if (messagesRef.current) {
       messagesRef.current.scrollTop = messagesRef.current.scrollHeight;
@@ -39,18 +38,18 @@ function App() {
     try {
       const res = await fetch(`${API_URL}/api/messages`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type':'application/json' },
         body: JSON.stringify({ content }),
       });
       const data = await res.json();
       if (!res.ok) throw new Error('Send failed');
       setMessages(prev => [...prev, data]);
-    } catch (err) {
-      console.error(err);
+    } catch (e) {
+      console.error(e);
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
     const txt = e.target.elements.content.value.trim();
     if (txt) {
@@ -63,7 +62,7 @@ function App() {
     <div
       className="app-container"
       style={{
-        backgroundImage: `linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)), url(${bgImage})`,
+        backgroundImage: `linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url(${bgImage})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }}
