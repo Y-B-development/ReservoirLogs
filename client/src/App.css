@@ -1,6 +1,6 @@
 /* client/src/App.css */
 
-/* Reset & full-screen background */
+/* Reset and full-screen background */
 html, body {
   height: 100%;
   margin: 0;
@@ -13,12 +13,17 @@ html, body {
   color: #f1f1f1;
 }
 
-/* Main container fills entire width & height */
+/* Ensure body scrolls normally */
+body {
+  display: block;
+}
+
+/* Main container uses full width and height */
 .app-container {
   display: flex;
   flex-direction: column;
   height: 100vh;
-  width: 100%;             /* full width—no empty side space */
+  width: 100vw;
   background: rgba(30, 30, 30, 0.85);
   box-sizing: border-box;
   padding: 1rem;
@@ -44,14 +49,14 @@ html, body {
   z-index: -1;
 }
 
-/* Scrollable messages area */
+/* Messages area fills between header and footer */
 .messages-container {
   flex: 1;
   overflow-y: auto;
   padding-right: 0.25rem;
 }
 
-/* Message bubble */
+/* Message bubble styling */
 .message {
   background: #292929;
   padding: 0.75rem 1rem;
@@ -89,7 +94,7 @@ button {
   cursor: pointer;
 }
 
-/* Mobile tweaks */
+/* Mobile responsive tweaks */
 @media (max-width: 400px) {
   .app-container {
     padding: 0.5rem;
