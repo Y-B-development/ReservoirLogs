@@ -1,3 +1,5 @@
+// client/src/App.js
+
 import React, { useEffect, useState, useRef } from 'react';
 import './App.css';
 import MessageList from './components/MessageList';
@@ -8,7 +10,7 @@ function App() {
   const messagesRef = useRef(null);
   const API_URL = 'https://tasteless-amalie-y-b-development-e34c22e7.koyeb.app';
 
-  // Polling for new messages
+  // Polling for new messages every 2s
   useEffect(() => {
     const fetchMessages = async () => {
       try {
@@ -25,7 +27,7 @@ function App() {
     return () => clearInterval(iv);
   }, []);
 
-  // Auto‑scroll to bottom
+  // Auto‑scroll to bottom on new messages
   useEffect(() => {
     if (messagesRef.current) {
       messagesRef.current.scrollTop = messagesRef.current.scrollHeight;
@@ -56,14 +58,11 @@ function App() {
     }
   };
 
-  // ReservoirLogs title split into spans
-  const title = 'RESERVO RLOGS'.replace(' ', '').split('').map((char, i) =>
-    <span key={i}>{char}</span>
-  );
-
   return (
     <div className="app-container">
-      <h1 className="reservoir-logo">{title}</h1>
+      <h1 className="reservoir-logo" data-text="ReservoirLogs">
+        ReservoirLogs
+      </h1>
       <div className="messages-container" ref={messagesRef}>
         <MessageList messages={messages} />
       </div>
