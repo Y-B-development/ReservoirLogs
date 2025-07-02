@@ -23,6 +23,7 @@ html, body {
 /* Sticky golden "ReservoirLogs" title without red shadow */
 .reservoir-logo {
   font-size: 3rem;
+  text-shadow: 0 0 10px rgba(232, 163, 23, 0.4); /* soft gold glow */
   text-align: center;
   margin: 0 0 1rem;
   position: sticky;
