@@ -1,22 +1,32 @@
 /* client/src/App.css */
 
-/* Full‑screen reset */
-html, body {
-  height: 100%;
+/* Full-screen background with dark overlay */
+body {
   margin: 0;
-  background: #0e0e0e;
+  padding: 0;
+  height: 100vh;
+  background: 
+    /* dark overlay layer */
+    linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+    /* poster image layer */
+    url('/assets/reservoir-dogs-poster.jpg') no-repeat center center;
+  background-size: cover;
+  font-family: 'Courier New', monospace;
   color: #f1f1f1;
-  font-family: 'StymieExtraBold', serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-/* Main container */
+/* Main chat container */
 .app-container {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 90vh;
+  width: 100%;
   max-width: 600px;
-  margin: 0 auto;
-  background: #1e1e1e;
+  background: rgba(30, 30, 30, 0.85); /* translucent dark background */
+  border-radius: 8px;
   box-shadow: 0 0 10px rgba(255,255,255,0.1);
   box-sizing: border-box;
   padding: 1rem;
@@ -24,6 +34,7 @@ html, body {
 
 /* Hateful Eight–style logo */
 .reservoir-logo {
+  font-family: 'StymieExtraBold', serif;
   font-size: 3rem;
   text-align: center;
   margin: 0 0 1rem;
@@ -39,14 +50,14 @@ html, body {
   z-index: -1;
 }
 
-/* Scrollable messages */
+/* Scrollable messages area */
 .messages-container {
   flex: 1;
   overflow-y: auto;
   padding-right: 0.25rem;
 }
 
-/* Individual message styles */
+/* Each message */
 .message {
   background: #292929;
   padding: 0.75rem 1rem;
@@ -64,7 +75,7 @@ html, body {
 form {
   position: sticky;
   bottom: 0;
-  background: #1e1e1e;
+  background: rgba(30, 30, 30, 0.85);
   display: flex;
   gap: 0.5rem;
   padding-top: 0.5rem;
@@ -87,6 +98,7 @@ button {
 /* Mobile tweaks */
 @media (max-width: 400px) {
   .app-container {
+    height: 95vh;
     padding: 0.5rem;
     box-shadow: none;
   }
