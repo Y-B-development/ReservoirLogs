@@ -20,30 +20,38 @@ html, body {
   padding: 1rem;
 }
 
-/* Sticky header */
+/* Sticky golden "ReservoirLogs" title without background */
 .reservoir-logo {
   font-size: 3rem;
   text-align: center;
   margin: 0 0 1rem;
   position: sticky;
   top: 0;
-  background: rgba(30, 30, 30, 0.85);
+  /* background removed */
   z-index: 10;
   color: #E8A317;
 }
+.reservoir-logo::before {
+  content: attr(data-text);
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  color: #9B2D30;
+  z-index: -1;
+}
 
-/* Messages scroll area */
+/* Scrollable messages area */
 .messages-container {
   flex: 1;
   overflow-y: auto;
   padding-right: 0.25rem;
 }
 
-/* Message bubble */
+/* Smaller message bubbles */
 .message {
   background: #292929;
-  padding: 0.75rem 1rem;
-  margin-bottom: 0.5rem;
+  padding: 0.5rem 0.75rem; /* reduced padding */
+  margin-bottom: 0.25rem; /* reduced margin */
   border-radius: 6px;
   word-wrap: break-word;
 }
