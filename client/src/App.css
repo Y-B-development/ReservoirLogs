@@ -1,6 +1,6 @@
 /* client/src/App.css */
 
-/* Full‑screen setup */
+/* Reset and full‑screen */
 html, body {
   height: 100%;
   margin: 0;
@@ -12,25 +12,38 @@ html, body {
 .app-container {
   display: flex;
   flex-direction: column;
-  height: 100vh;            /* fill viewport */
+  height: 100vh;
   max-width: 600px;
-  margin: 0 auto;           /* center horizontally */
+  margin: 0 auto;
   background: #1e1e1e;
   box-shadow: 0 0 10px rgba(255,255,255,0.1);
   box-sizing: border-box;
   padding: 1rem;
 }
 
-/* Messages area */
-.messages-container {
-  flex: 1;                  /* take all space above form */
-  overflow-y: auto;         /* scroll inside here */
-  padding-right: 0.25rem;
-  /* padding-bottom removed */
-  margin-bottom: 0;
+/* Title in 'Reservoir Dogs' style */
+.reservoir-logo {
+  font-size: 2rem;
+  text-align: center;
+  margin: 0 0 1rem;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+}
+.reservoir-logo span:nth-child(odd) {
+  color: #E40613; /* red */
+}
+.reservoir-logo span:nth-child(even) {
+  color: #ffffff; /* white */
 }
 
-/* Individual message */
+/* Scrollable messages */
+.messages-container {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 0.25rem;
+}
+
+/* Message bubble */
 .message {
   background: #292929;
   padding: 0.75rem 1rem;
@@ -45,17 +58,16 @@ html, body {
   margin-top: 0.25rem;
 }
 
-/* Sticky form at bottom */
+/* Sticky input bar */
 form {
   position: sticky;
   bottom: 0;
-  background: #1e1e1e;      /* match container background */
-  padding-top: 0.5rem;
+  background: #1e1e1e;
   display: flex;
   gap: 0.5rem;
+  padding-top: 0.5rem;
 }
 
-/* Input styling */
 input {
   flex: 1;
   padding: 0.5rem;
@@ -63,24 +75,11 @@ input {
   border-radius: 4px;
 }
 
-/* Send button */
 button {
   padding: 0.5rem 1rem;
   border: none;
-  background: #4CAF50;
+  background: #4caf50;
   color: white;
   border-radius: 4px;
   cursor: pointer;
-}
-
-/* Mobile adjustments */
-@media (max-width: 400px) {
-  .app-container {
-    padding: 0.5rem;
-    box-shadow: none;
-  }
-  input, button {
-    font-size: 14px;
-    padding: 0.4rem;
-  }
 }
