@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState, useRef } from 'react';
 import './App.css';
-import bgImage from './assets/reservoir-dogs-poster.jpg';  // ← import here
+import bgImage from './assets/reservoir-dogs-poster.jpg';
 import MessageList from './components/MessageList';
 import MessageForm from './components/MessageForm';
 
@@ -11,41 +11,46 @@ function App() {
   const messagesRef = useRef(null);
   const API_URL = 'https://tasteless-amalie-y-b-development-e34c22e7.koyeb.app';
 
-  // polling for new messages…
+  // Polling every 2 seconds
   useEffect(() => {
     const fetchMessages = async () => {
       try {
         const res = await fetch(`${API_URL}/api/messages`);
         if (!res.ok) throw new Error('Fetch failed');
-        setMessages(await res.json());
-      } catch (e) { console.error(e); }
+        const data = await res.json();
+        setMessages(data);
+      } catch (err) {
+        console.error(err);
+      }
     };
     fetchMessages();
     const iv = setInterval(fetchMessages, 2000);
     return () => clearInterval(iv);
   }, []);
 
-  // auto‑scroll to bottom
+  // Auto-scroll
   useEffect(() => {
     if (messagesRef.current) {
       messagesRef.current.scrollTop = messagesRef.current.scrollHeight;
     }
   }, [messages]);
 
-  const sendMessage = async content => {
+  const sendMessage = async (content) => {
     try {
       const res = await fetch(`${API_URL}/api/messages`, {
         method: 'POST',
-        headers: { 'Content-Type':'application/json' },
-        body: JSON.stringify({ content })
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ content }),
       });
       const data = await res.json();
       if (!res.ok) throw new Error('Send failed');
-      setMessages(m => [...m, data]);
-    } catch (e) { console.error(e); }
+      setMessages(prev => [...prev, data]);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     const txt = e.target.elements.content.value.trim();
     if (txt) {
@@ -60,7 +65,7 @@ function App() {
       style={{
         backgroundImage: `linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)), url(${bgImage})`,
         backgroundSize: 'cover',
-        backgroundPosition: 'center'
+        backgroundPosition: 'center',
       }}
     >
       <h1 className="reservoir-logo" data-text="ReservoirLogs">
@@ -69,10 +74,7 @@ function App() {
       <div className="messages-container" ref={messagesRef}>
         <MessageList messages={messages} />
       </div>
-      <form onSubmit={handleSubmit}>
-        <input name="content" type="text" placeholder="Type a message…" />
-        <button type="submit">Send</button>
-      </form>
+      <MessageForm onSend={sendMessage} />
     </div>
   );
 }
